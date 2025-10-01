@@ -1,0 +1,14 @@
+{
+  "name": "galaxy-cv",
+  "private": true,
+  "scripts": {
+    "serve": "http-server -p 8080 -c-1 .",
+    "capture": "node scripts/capture.js"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "puppeteer": "^22.10.0"
+  }
+}
+
+
