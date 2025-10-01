@@ -125,43 +125,49 @@ function seedMotionParams() {
 seedMotionParams();
 
 // Master ScrollTrigger: smooth both vertical and horizontal behavior with eased mapping
-gsap.to({}, {
-  scrollTrigger: {
-    trigger: document.body,
-    start: 'top top',
-    end: 'max',
-    scrub: 1
-  },
-  onUpdate: function() {
-    // tween progress (0..1) tied to scroll via ScrollTrigger
-    const t = this;
-    const eased = gsap.parseEase('power2.out')(t.progress());
-    for (let i = 0; i < objects.length; i++) {
-      const obj = objects[i];
-      const p = motionParams[i];
-      const half = viewportHalfWidthAt(obj.position.z);
-      const maxX = Math.max(0.5, half - viewportMargin);
-      const startX = -p.dir * maxX + p.jitter;
-      const endX = p.dir * maxX - p.jitter;
-      // per-object local progress with speed & phase, also eased to reduce sudden jumps
-      const localLinear = gsap.utils.clamp(0, 1, (eased - p.phase) * (1 / p.speed));
-      const local = gsap.parseEase('power2.out')(localLinear);
-      obj.position.x = gsap.utils.interpolate(startX, endX, local);
-      // subtle vertical float around baseline Y to avoid purely vertical-only feeling
-      obj.position.y = obj.userData.baseY + Math.sin((local * p.floatFreq + i * 0.13) * Math.PI * 2) * p.floatAmp;
-      const spinBase = local * Math.PI * 2;
-      obj.rotation.x = spinBase * p.spinX;
-      obj.rotation.y = spinBase * p.spinY;
-      const visible = local > 0.02 && local < 0.98;
-      const m = obj.material;
-      if (m) m.opacity = 0.0; // ensure no shell/gray fill remains
-      const e = obj.children[0];
-      if (e && e.material) {
-        e.material.opacity = visible ? 0.95 : 0.5; // strong edge line
-      }
+function updateMotionWithProgress(progress) {
+  const eased = gsap.parseEase('power2.out')(progress);
+  for (let i = 0; i < objects.length; i++) {
+    const obj = objects[i];
+    const p = motionParams[i];
+    const half = viewportHalfWidthAt(obj.position.z);
+    const maxX = Math.max(0.5, half - viewportMargin);
+    const startX = -p.dir * maxX + p.jitter;
+    const endX = p.dir * maxX - p.jitter;
+    // per-object local progress with speed & phase, also eased to reduce sudden jumps
+    const localLinear = gsap.utils.clamp(0, 1, (eased - p.phase) * (1 / p.speed));
+    const local = gsap.parseEase('power2.out')(localLinear);
+    obj.position.x = gsap.utils.interpolate(startX, endX, local);
+    // subtle vertical float around baseline Y to avoid purely vertical-only feeling
+    obj.position.y = obj.userData.baseY + Math.sin((local * p.floatFreq + i * 0.13) * Math.PI * 2) * p.floatAmp;
+    const spinBase = local * Math.PI * 2;
+    obj.rotation.x = spinBase * p.spinX;
+    obj.rotation.y = spinBase * p.spinY;
+    const visible = local > 0.02 && local < 0.98;
+    const m = obj.material;
+    if (m) m.opacity = 0.0; // ensure no shell/gray fill remains
+    const e = obj.children[0];
+    if (e && e.material) {
+      e.material.opacity = visible ? 0.95 : 0.5; // strong edge line
     }
   }
+}
+
+const masterST = ScrollTrigger.create({
+  trigger: document.body,
+  start: 'top top',
+  end: 'max',
+  scrub: 1,
+  onUpdate: (self) => updateMotionWithProgress(self.progress),
+  onRefresh: (self) => {
+    setStartPositions();
+    seedMotionParams();
+    updateMotionWithProgress(self.progress);
+  }
 });
+
+// Initialize positions to match the current scroll state to avoid a jump at first scroll
+updateMotionWithProgress(masterST.progress);
 
 // Camera vertical scroll mapping
 gsap.to(camera.position, {
