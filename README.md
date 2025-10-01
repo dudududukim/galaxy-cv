@@ -1,31 +1,63 @@
 # Minimal 3D Portfolio
 
-Ultra-minimal portfolio with Three.js + GSAP ScrollTrigger. Lateral 3D sweeps tied to scroll, one accent color, Swiss/Brutalist vibe.
+Swiss/Brutalist, ultra-minimal portfolio with Three.js and GSAP ScrollTrigger. Lateral torus motion tied to scroll, single accent color, smooth interactions with Lenis.
 
-## 폴더 구조
+## Preview
 
-- `index.html` — 메인 페이지 (CDN 사용)
-- `assets/css/style.css` — 사이트 스타일 (빌드 없이 바로 사용)
-- `assets/scss/style.scss` — SCSS 원본 (원하면 여기서 수정 후 CSS로 복사)
-- `assets/js/main.js` — Three.js, GSAP, Lenis 초기화 및 스크롤 애니메이션
+> Screenshots are stored under `assets/screenshots/`.
 
-## 로컬 실행
+<p>
+  <img src="assets/screenshots/hero.png" alt="Hero" width="800" />
+  <img src="assets/screenshots/work.png" alt="Work" width="800" />
+</p>
 
-빌드 없이 브라우저에서 `index.html` 열면 됩니다.
+## Features
 
-## GitHub Pages 배포
+- Geometry-first visuals: Torus-only scene, alternating white/accent edges
+- Scroll-driven lateral motion with per-object randomness (phase, speed, spin, float)
+- Smooth page and anchor scrolling (Lenis; native fallback)
+- Cascading reveal animations (GSAP ScrollTrigger) for content
+- Mobile-aware performance (reduced counts, pixel ratio caps)
 
-1. GitHub에 새 리포지토리 생성 후 이 프로젝트를 커밋/푸시합니다.
-2. 리포지토리 설정(Settings) → Pages 이동
-3. Source: `Deploy from a branch` 선택 → Branch: `main` / Folder: `/ (root)` 선택 → Save
-4. 수 분 후 `https://<username>.github.io/<repo>/` 주소로 접속
+## Tech Stack
 
-옵션: 커스텀 도메인을 연결하려면 Pages 설정에서 도메인 추가 후 DNS 설정을 합니다.
+- Three.js (scene/rendering)
+- GSAP + ScrollTrigger (scroll orchestration)
+- Lenis (smooth scrolling)
 
-## 편집 가이드
+## Project Structure
 
-- 색상은 `:root`의 CSS 변수에서 하나의 accent 컬러만 사용하세요.
-- 모바일 성능 향상을 위해 객체 수(`count`)와 픽셀 비율 제한을 유지하세요.
-- SCSS를 사용하려면 별도의 Sass 컴파일러를 사용하거나 결과를 `assets/css/style.css`로 복사하세요.
+- `index.html` — entry point (CDNs only; no build step)
+- `assets/css/style.css` — site styles
+- `assets/css/config.css` — typography variables
+- `assets/scss/` — SCSS sources (optional, no build wired)
+- `assets/js/main.js` — Three.js/GSAP/Lenis setup and animations
+- `assets/screenshots/` — screenshots referenced in this README
+
+## Run Locally
+
+Open `index.html` directly in your browser, or serve statically:
+
+```bash
+python3 -m http.server 8080
+# then open http://localhost:8080
+```
+
+## Deploy (GitHub Pages)
+
+1) Push this repository to GitHub
+2) Repository → Settings → Pages
+3) Source: Deploy from a branch → Branch: `main` / Folder: `/ (root)` → Save
+4) Visit `https://<username>.github.io/<repo>/`
+
+## Editing Notes
+
+- Colors: keep a single accent color via CSS variables in `:root`
+- Performance: mind `count`, `verticalSpacing`, and pixel ratio caps for mobile
+- If you edit SCSS, copy the result to `assets/css/style.css` (no build wired)
+
+## License
+
+MIT
 
 
