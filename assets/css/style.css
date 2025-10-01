@@ -1,0 +1,106 @@
+/* ========== RESET ========== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ========== COLOR SYSTEM (STRICT) ========== */
+:root {
+  --black: #000000;
+  --white: #FFFFFF;
+  --accent: #0066FF; /* Electric Blue (pick one only) */
+  --gray: #808080;
+}
+
+/* ========== BASE ========== */
+html, body { height: 100%; }
+body {
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif);
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mono { font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace); }
+
+/* Fixed Canvas */
+#webgl {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100vh;
+  z-index: 1;
+  display: block;
+}
+
+/* Minimal scroll progress bar */
+#progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: var(--accent);
+  z-index: 200;
+  pointer-events: none;
+}
+
+/* Navigation */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  padding: 2rem 4rem;
+  display: flex; justify-content: space-between; align-items: center;
+  z-index: 150;
+  mix-blend-mode: difference; /* invert over bright geometry lines */
+}
+.logo { font-size: 1.5rem; font-weight: 700; text-decoration: none; color: var(--white); }
+.nav-links a {
+  margin-left: 2rem; text-decoration: none; color: var(--white);
+  font-size: 1rem; transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--accent); }
+
+/* Content */
+main { position: relative; z-index: 10; padding: 0 4rem; }
+section {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  padding: 4rem 0;
+}
+h1 { font-size: clamp(3rem, 10vw, 8rem); font-weight: 700; line-height: 0.9; letter-spacing: -0.02em; }
+h2 { font-size: clamp(2rem, 6vw, 4rem); font-weight: 700; margin-bottom: 3rem; }
+h3 { font-size: 1.5rem; font-weight: 600; }
+p { font-size: 1.125rem; line-height: 1.6; color: rgba(255,255,255,0.7); }
+
+/* Projects */
+.project { border-top: 1px solid rgba(255,255,255,0.1); padding: 2rem 0; display: grid; grid-template-columns: auto 1fr; gap: 2rem; transition: all 0.3s; }
+.project:hover { padding-left: 2rem; }
+.project-number { color: var(--accent); font-size: 1rem; font-weight: 700; }
+.project-tech { font-size: 0.875rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem; }
+
+/* Reveal initial states */
+.project { opacity: 0; transform: translateX(-50px); will-change: transform, opacity; }
+.skill-item { opacity: 0; transform: translateX(-40px); will-change: transform, opacity; }
+.contact h2, .contact .contact-button, .contact .social a { opacity: 0; transform: translateX(-40px); will-change: transform, opacity; }
+
+/* Skills Grid */
+.skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+.skill-item { padding: 2rem; border: 1px solid rgba(255,255,255,0.1); transition: border-color 0.3s; }
+.skill-item:hover { border-color: var(--accent); }
+
+/* Contact */
+.contact-button {
+  display: inline-block; padding: 1.5rem 3rem; background: var(--accent); color: var(--white);
+  text-decoration: none; font-weight: 600; font-size: 1.25rem; transition: transform 0.3s, box-shadow 0.3s;
+}
+.contact-button:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--accent); }
+.social { margin-top: 2rem; }
+.social a { margin-right: 2rem; color: var(--white); text-decoration: none; transition: color 0.3s; }
+.social a:hover { color: var(--accent); }
+
+/* Mobile */
+@media (max-width: 768px) {
+  nav, main { padding: 1rem 2rem; }
+  .nav-links { display: none; }
+  .project { grid-template-columns: 1fr; }
+  #progress { height: 1px; }
+}
+
+

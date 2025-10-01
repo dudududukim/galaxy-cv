@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>Du Hyeon Kim — Portfolio</title>
+  <link rel="stylesheet" href="assets/css/config.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- 3D Background Canvas -->
+  <canvas id="webgl"></canvas>
+  <div id="progress"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#" class="logo">DuHyeon</a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Content -->
+  <main>
+    <section class="hero">
+      <h1>Creative Developer</h1>
+      <p class="mono">Building digital experiences with geometry, motion, and restraint.</p>
+    </section>
+
+    <section id="work" class="work">
+      <h2>Selected Work</h2>
+      <div class="project-list">
+        <article class="project">
+          <span class="project-number mono">01</span>
+          <div>
+            <h3>Minimal 3D Portfolio</h3>
+            <p>Ultra-minimal lateral 3D scroll with Three.js + GSAP.</p>
+            <span class="project-tech mono">React, Three.js, GSAP</span>
+          </div>
+        </article>
+        <article class="project">
+          <span class="project-number mono">02</span>
+          <div>
+            <h3>Interactive Visualization</h3>
+            <p>Data-driven visuals focused on clarity and motion.</p>
+            <span class="project-tech mono">D3.js, WebGL</span>
+          </div>
+        </article>
+        <article class="project">
+          <span class="project-number mono">03</span>
+          <div>
+            <h3>Experimental UI</h3>
+            <p>Micro-interactions exploring tactile feedback.</p>
+            <span class="project-tech mono">Next.js, Framer Motion</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="skills">
+      <h2>Skills</h2>
+      <div class="skill-grid">
+        <div class="skill-item">
+          <h3>Frontend</h3>
+          <p class="mono">React, Vue, Next.js, TypeScript</p>
+        </div>
+        <div class="skill-item">
+          <h3>3D/Animation</h3>
+          <p class="mono">Three.js, WebGL, GSAP, Blender</p>
+        </div>
+        <div class="skill-item">
+          <h3>Design</h3>
+          <p class="mono">UI/UX, Figma, Adobe CC</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <h2>About</h2>
+      <p>Creative developer based in Korea. I craft focused, minimal interfaces blending code, motion, and design. I like clarity, geometry, and fast software.</p>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Let's Work Together</h2>
+      <a class="contact-button" href="mailto:you@email.com">Get in Touch</a>
+      <div class="social">
+        <a href="#">GitHub</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Twitter</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- CDN: Three.js, GSAP + ScrollTrigger, Lenis -->
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.44/dist/lenis.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+
+
